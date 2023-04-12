@@ -1,5 +1,5 @@
 # FounderDigest
-a Rails 7 boilerplate template by [@ryanckulp](https://twitter.com/ryanckulp), created to ship SaaS apps quickly. Learn how to use this at [24 Hour MVP](https://founderhacker.com/24-hour-mvp).
+a place for founders to share their newsletters and learn together. Learn how to use this at [24 Hour MVP](https://founderhacker.com/24-hour-mvp).
 
 features:
 * user authentication via [Devise](https://github.com/plataformatec/devise)
@@ -25,44 +25,11 @@ features:
 
 ## Installation
 1. clone the repo
-1. `cd speedrail && bundle` (installs dependencies)
-1. `rails g rename:into new_app_name` (then `cd ../new_app_name` to refresh)
-1. remove `gem 'rename'` from Gemfile, then `bin/setup` to create DB
-1. `bundle exec figaro install`
-1. `cp config/application-sample.yml config/application.yml` (put ENV vars here)
-1. `rm -rf .git && git init && git add . && git commit -m 'first commit'` to remove git references to this repo and reinitialize git
+2. `cd speedrail && bundle` (installs dependencies)
+3. `bundle exec figaro install`
+4. `cp config/application-sample.yml config/application.yml` (put ENV vars here)
 
 ## Development
 ```sh
 bin/dev # uses foreman to boot server, frontend, and bg job queue
 ```
-
-**troubleshooting**
-`Turbo Drive` lazy-loads pages following form submission, causing script tags at the bottom of following views to not always load.
-
-```html
-<!-- add data-turbo=false to form submission buttons if the following view needs a full render -->
-<button data-turbo="false" type="submit" ...>Submit</button>
-```
-
-## Testing
-```
-bundle exec rspec # run all tests inside spec/
-bundle exec rspec spec/dir_name # run all tests inside given directory
-```
-
-## Deploying
-```sh
-figaro heroku:set -e production # you only need to do this once
-heroku git:remote -a heroku_app_name_here # you only need to do this once
-```
-
-```sh
-git push heroku master # deploys master branch
-git push heroku some_branch_name:master # deploys non-master branch
-```
-
-**note**: Heroku must have 2 'dynos' enabled, `web` + `worker`, to process background jobs. if you don't need a queue, simply remove the `worker` task from `Procfile` and don't invoke `.delayed` functions.
-
-## Miscellaneous
-to use Postmark for emails, set `postmark_api_token` inside `application.yml`, then [verify your sending domain](https://account.postmarkapp.com/signature_domains/initialize_verification).
